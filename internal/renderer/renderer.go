@@ -1,4 +1,4 @@
-package main
+package renderer
 
 import (
 	"os"
@@ -108,9 +108,9 @@ func slideStyle() ansi.StyleConfig {
 	return style
 }
 
-// renderSlide renders a markdown slide to a terminal-ready string.
+// RenderSlide renders a markdown slide to a terminal-ready string.
 // All newlines are converted to \r\n for raw-mode terminals.
-func renderSlide(markdown string, width int) string {
+func RenderSlide(markdown string, width int) string {
 	r, err := glamour.NewTermRenderer(
 		glamour.WithStyles(slideStyle()),
 		glamour.WithWordWrap(width-6), // account for 3-char margin on each side

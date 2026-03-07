@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/ochcaroline/slidey/internal/presenter"
+	"github.com/ochcaroline/slidey/internal/slides"
 )
 
 // version is set at build time via -ldflags "-X main.version=x.y.z"
@@ -25,13 +28,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	meta, slides := parseSlides(string(data))
+	meta, slides := slides.ParseSlides(string(data))
 	if len(slides) == 0 && meta.Title == "" {
 		fmt.Fprintln(os.Stderr, "no slides found")
 		os.Exit(1)
 	}
 
-	p, err := NewPresenter(meta, slides)
+	p, err := presenter.NewPresenter(meta, slides)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

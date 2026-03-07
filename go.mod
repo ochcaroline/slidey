@@ -1,4 +1,4 @@
-module slidey
+module github.com/ochcaroline/slidey
 
 go 1.26.1
 

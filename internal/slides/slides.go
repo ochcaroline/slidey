@@ -1,4 +1,4 @@
-package main
+package slides
 
 import (
 	"regexp"
@@ -12,6 +12,22 @@ type Metadata struct {
 	Title       string
 	Description string
 	Author      string
+}
+
+// ParseSlides strips YAML frontmatter and HTML comments, splits on "---"
+// separators, and returns the metadata together with the non-empty slides.
+func ParseSlides(content string) (Metadata, []string) {
+	fm, rest := parseFrontmatter(content)
+	meta := parseMetadata(fm)
+
+	var slides []string
+	for s := range strings.SplitSeq(rest, "\n---\n") {
+		s = strings.TrimSpace(htmlComment.ReplaceAllString(s, ""))
+		if s != "" {
+			slides = append(slides, s)
+		}
+	}
+	return meta, slides
 }
 
 // parseMetadata reads key: value lines from the raw frontmatter block.
@@ -46,20 +62,4 @@ func parseFrontmatter(s string) (fm string, rest string) {
 		return "", s
 	}
 	return s[4 : 4+end], strings.TrimSpace(s[4+end+4:])
-}
-
-// parseSlides strips YAML frontmatter and HTML comments, splits on "---"
-// separators, and returns the metadata together with the non-empty slides.
-func parseSlides(content string) (Metadata, []string) {
-	fm, rest := parseFrontmatter(content)
-	meta := parseMetadata(fm)
-
-	var slides []string
-	for s := range strings.SplitSeq(rest, "\n---\n") {
-		s = strings.TrimSpace(htmlComment.ReplaceAllString(s, ""))
-		if s != "" {
-			slides = append(slides, s)
-		}
-	}
-	return meta, slides
 }

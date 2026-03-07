@@ -10,3 +10,5 @@ slidey
 *.test
 *.out
 vendor/
+
+.DS_STORE

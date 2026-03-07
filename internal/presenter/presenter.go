@@ -1,22 +1,24 @@
-package main
+package presenter
 
 import (
 	"fmt"
 	"os"
 	"strings"
 
+	"github.com/ochcaroline/slidey/internal/renderer"
+	"github.com/ochcaroline/slidey/internal/slides"
 	"golang.org/x/term"
 )
 
 // Presenter manages the terminal presentation loop.
 type Presenter struct {
-	meta     Metadata
+	meta     slides.Metadata
 	slides   []string
 	current  int
 	oldState *term.State
 }
 
-func NewPresenter(meta Metadata, slides []string) (*Presenter, error) {
+func NewPresenter(meta slides.Metadata, slides []string) (*Presenter, error) {
 	oldState, err := term.MakeRaw(int(os.Stdin.Fd()))
 	if err != nil {
 		return nil, err
@@ -88,7 +90,7 @@ func (p *Presenter) drawTitleSlide(w, h int) {
 // drawContentSlide renders a normal markdown slide.
 func (p *Presenter) drawContentSlide(w, h int) {
 	_ = h
-	out := renderSlide(p.slides[p.slideIndex()], w)
+	out := renderer.RenderSlide(p.slides[p.slideIndex()], w)
 	fmt.Print("\r\n\r\n")
 	fmt.Print(out)
 }
