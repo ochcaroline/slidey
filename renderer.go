@@ -52,7 +52,7 @@ func slideStyle() ansi.StyleConfig {
 	style.H2 = ansi.StyleBlock{
 		StylePrimitive: ansi.StylePrimitive{
 			Prefix:          "    ",
-			Suffix:          "    ",
+			Suffix:          " ",
 			Color:           ptr("255"),
 			BackgroundColor: ptr("#9A0F98"),
 			Bold:            ptr(true),
@@ -63,8 +63,8 @@ func slideStyle() ansi.StyleConfig {
 	// H3: bold, subtle background, three-space padding.
 	style.H3 = ansi.StyleBlock{
 		StylePrimitive: ansi.StylePrimitive{
-			Prefix:          "     ",
-			Suffix:          "     ",
+			Prefix:          "       ",
+			Suffix:          " ",
 			Color:           ptr("255"),
 			BackgroundColor: ptr("#6A0572"),
 			Bold:            ptr(true),
