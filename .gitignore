@@ -12,3 +12,5 @@ slidey
 vendor/
 
 .DS_STORE
+# Added by goreleaser init:
+dist/
