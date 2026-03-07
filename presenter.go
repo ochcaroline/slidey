@@ -150,6 +150,17 @@ func (p *Presenter) Run() {
 			p.prev()
 		case 'q', 3: // q or Ctrl-C
 			return
+		case 27: // ESC sequence (arrow keys)
+			esc := make([]byte, 2)
+			n, _ := os.Stdin.Read(esc)
+			if n == 2 && esc[0] == '[' {
+				switch esc[1] {
+				case 'B': // down arrow
+					p.next()
+				case 'A': // up arrow
+					p.prev()
+				}
+			}
 		}
 	}
 }
