@@ -10,7 +10,9 @@ slidey
 *.test
 *.out
 vendor/
+bin/
 
 .DS_STORE
+
 # Added by goreleaser init:
 dist/

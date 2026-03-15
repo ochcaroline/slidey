@@ -1,0 +1,16 @@
+[tools]
+go = "latest"
+
+[tasks.install]
+description = "Install packages"
+alias = "i"
+run = "go mod download"
+
+[tasks.build]
+description = "Build binary to output folder"
+alias = "b"
+run = [
+    "echo 'Package: ./bin/slidey'",
+    "go build -o ./bin/slidey ."
+]
+
