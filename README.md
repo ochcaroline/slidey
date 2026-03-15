@@ -9,6 +9,8 @@ And nothing freaking else.
 
 Because I was tired of bloated tools that do everything (and thus fail in things that I need them to do - show slides without crashing spectacularly)
 
+It doesn't use loops like `bubbletea`, but it renders the slide once and then uses buffer inputs for steering. Which actually makes handling things like resolution and size changes (and also buffer heights) much easier.
+
 ## Usage
 
 ```
